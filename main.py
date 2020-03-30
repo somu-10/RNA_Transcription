@@ -1,5 +1,29 @@
 
+def check_input (x):
+	if ( len(x)%3 == 0 ):
+		if(x.isupper() == True and x.isalpha() == True):
+			pass
+		else:
+			raise ValueError ('Invalid codon')
+	else :
+		raise ValueError ('Invalid chain length')
 
+
+
+def transcript(x):
+	for index_x in range(0, len(x), 3):
+		m=x[index_x:index_x + 3]		
+		y = codons.get(m)
+				
+		if (m == "UAG" or m=="UAA" or m=="UGA"):
+			print("STOP CODON. Chain broken and transcription terminated.")
+			break
+		else:
+			print("Here's the peptide sequence: ")
+			print(amino_acids.get(y))
+			
+		index_x = index_x + 3
+	return 0
 amino_acids= {
 "A":"Alanine",
 "C": "Cysteine",
@@ -22,7 +46,6 @@ amino_acids= {
 "W":"Tryptophan",
 "Y":"Tyrosine"
 }
-
 codons = {
 "GCA":"A", "GCC":"A", "GCG":"A", "GCU":"A",
 "UGC":"C","UGU":"C",
@@ -50,16 +73,8 @@ codons = {
 
 x=input("Enter your nucleotide code :")
 #print("Here's the sequence of amino acids present in it: ")
-print("Here's the peptide sequence: ")
-keys_list=codons.keys()
-#if x in keys_list+
-for index_x in range(0,len(x),3) :
-	y=codons.get(x[index_x:index_x+3],"NONE")
-	if (y == "NONE"):
-		print("TERMINATING CODON")
-	else:
-		print(amino_acids.get(y,"NONE"))
-		index_x=index_x + 3
-#else 
-#	print("CODON DOES NOT CODE FOR ANY AMINO ACID")
-	
+check_input(x)
+
+#keys_list=codons.keys()
+transcript(x)
+
